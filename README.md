@@ -157,3 +157,87 @@ curl -X POST http://localhost:3000/users/login \
   "password": "password123"
 }'
 ```
+
+# User Profile Endpoint
+
+## Endpoint: `/users/profile`
+
+### Method: GET
+
+### Description:
+This endpoint is used to retrieve the profile of the authenticated user.
+
+### Headers:
+- `Authorization`: Bearer token
+
+### Responses:
+
+#### Success:
+- **Status Code: 200**
+- **Body:**
+  ```json
+  {
+    "_id": "string",
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "socketId": "string"
+  }
+  ```
+
+#### Errors:
+- **Status Code: 401**
+  - **Description:** Unauthorized access.
+  - **Body:**
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+### Example Request:
+```bash
+curl -X GET http://localhost:3000/users/profile \
+-H "Authorization: Bearer <token>"
+```
+
+# User Logout Endpoint
+
+## Endpoint: `/users/logout`
+
+### Method: GET
+
+### Description:
+This endpoint is used to log out the authenticated user.
+
+### Headers:
+- `Authorization`: Bearer token
+
+### Responses:
+
+#### Success:
+- **Status Code: 200**
+- **Body:**
+  ```json
+  {
+    "message": "Logged out"
+  }
+  ```
+
+#### Errors:
+- **Status Code: 401**
+  - **Description:** Unauthorized access.
+  - **Body:**
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+### Example Request:
+```bash
+curl -X GET http://localhost:3000/users/logout \
+-H "Authorization: Bearer <token>"
+```
