@@ -110,16 +110,7 @@ The request body should be a JSON object with the following structure:
 - **Body:**
   ```json
   {
-    "token": "string",
-    "user": {
-      "_id": "string",
-      "fullname": {
-        "firstname": "string",
-        "lastname": "string"
-      },
-      "email": "string",
-      "socketId": "string"
-    }
+    "message":"You're successfully logged in to Fery Ride app"
   }
   ```
 
