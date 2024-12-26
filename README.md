@@ -237,31 +237,95 @@ curl -X GET http://localhost:3000/users/logout \
 
 ## Endpoints
 
+### /users/register
+// ...existing documentation...
+
+### /users/login
+// ...existing documentation...
+
+### /users/profile
+// ...existing documentation...
+
+### /users/logout
+// ...existing documentation...
+
 ### /users/listride
 
 **GET** `/users/listride`
 
-Returns mock ride data.
+Returns a list of mock rides with ride ID, distance, and fare.
 
 #### Response
 
-- `200 OK`: Returns a list of mock rides.
+- **200 OK**: Returns a JSON object containing an array of rides.
   ```json
   {
     "rides": [
-      { "rideId": "1", "distance": "10km", "fare": "Rs15" },
-      { "rideId": "2", "distance": "5km", "fare": "Rs8" },
-      { "rideId": "3", "distance": "20km", "fare": "Rs25" }
+      { "rideId": "10ys5nkwzruicb", "distance": "10km", "fare": "Rs15" },
+      { "rideId": "yc62gyyyq7exz", "distance": "5km", "fare": "Rs8" },
+      { "rideId": "ht4u26dq1konh", "distance": "20km", "fare": "Rs25" },
+      { "rideId": "yvuwy6oyxyry", "distance": "15km", "fare": "Rs18" },
+      { "rideId": "8exfeildz3jll", "distance": "7km", "fare": "Rs10" }
     ]
   }
   ```
 
-#### Errors
-
-- `500 Internal Server Error`: If there is an internal server error.
+- **500 Internal Server Error**: Returns a JSON object with an error message.
   ```json
   {
     "message": "Internal server error",
-    "error": "Error message"
+    "error": "error message"
+  }
+  ```
+
+### /users/ridedetails/:rideId
+
+**GET** `/users/ridedetails/:rideId`
+`/users/ridedetails/10ys5nkwzruicb`
+
+Returns the details of a specific ride based on the ride ID.
+
+#### Response
+
+- **200 OK**: Returns a JSON object containing the ride details.
+  ```json
+  {
+    "rideId": "10ys5nkwzruicb",
+    "vehicleDetails": {
+      "vehicleType": "Sedan",
+      "vehicleNumber": "DL5LMN1234",
+      "vehicleName": "Honda City"
+    },
+    "pickupDetails": {
+      "pickupTime": "2023-10-01T10:00:00Z",
+      "pickupLocation": "Connaught Place, Delhi"
+    },
+    "dropoffDetails": {
+      "dropoffTime": "2023-10-01T10:30:00Z",
+      "dropoffLocation": "India Gate, Delhi"
+    },
+    "fare": {
+      "rideFare": 150,
+      "tax": 15,
+      "paymentMethod": "Cash"
+    },
+    "driverName": "John Doe",
+    "rideDate": "2023-10-01T10:00:00.000Z",
+    "rideStatus": "Completed"
+  }
+  ```
+
+- **404 Not Found**: Returns a JSON object with an error message.
+  ```json
+  {
+    "message": "Ride not found"
+  }
+  ```
+
+- **500 Internal Server Error**: Returns a JSON object with an error message.
+  ```json
+  {
+    "message": "Internal server error",
+    "error": "error message"
   }
   ```

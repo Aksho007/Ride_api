@@ -82,15 +82,32 @@ module.exports.logoutUser = async (req, res, next) => {
 
 }
 
+const generateRandomRideId = () => {
+    return Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 14).slice(0, 2);
+};
+
 module.exports.listRides = async (req, res) => {
     try {
         const mockRides = [
-            { rideId: '1', distance: '10km', fare: 'Rs15' },
-            { rideId: '2', distance: '5km', fare: 'Rs8' },
-            { rideId: '3', distance: '20km', fare: 'Rs25' }
+            { rideId: '10ys5nkwzruicb', distance: '10km', fare: 'Rs15' },
+            { rideId: 'yc62gyyyq7exz', distance: '5km', fare: 'Rs8' },
+            { rideId: 'ht4u26dq1konh', distance: '20km', fare: 'Rs25' },
+            { rideId: 'yvuwy6oyxyry', distance: '15km', fare: 'Rs18' },
+            { rideId: '8exfeildz3jll', distance: '7km', fare: 'Rs10' }
         ];
         res.json({ rides: mockRides });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+};
+
+module.exports.getRideDetails = async (req, res, next) => {
+    const { rideId } = req.params;
+
+    try {
+        const ride = await userService.getRideDetails(rideId);
+        res.status(200).json(ride);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
     }
 };

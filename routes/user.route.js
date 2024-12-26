@@ -25,4 +25,6 @@ router.get('/logout', authMiddleware.authUser, userController.logoutUser)
 
 router.get('/listrides', userController.listRides);
 
+router.get('/ridedetails/:rideId', userController.getRideDetails);
+
 module.exports = router;
