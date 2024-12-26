@@ -50,9 +50,9 @@ This is a Ride API that allows users to register, login, view their profile, lis
 ## API Endpoints
 
 ### User Registration
-- **Endpoint:** `/users/register`
-- **Method:** `POST`
-- **Body:**
+1. **Endpoint:** `/users/register`
+2. **Method:** `POST`
+3. **Body:**
     ```json
     {
         "email": "user@example.com",
@@ -96,258 +96,68 @@ This is a Ride API that allows users to register, login, view their profile, lis
     ```
 
 ### List Rides
-- **Endpoint:** `/users/listrides`
-- **Method:** `GET`
+1. **Endpoint:** `/users/listrides`
+2. **Method:** `GET`
+3. **Responses:**
+    - **200 OK:** Returns a JSON object containing an array of rides.
+      ```json
+      {
+        "rides": [
+          { "rideId": "1", "distance": "10km", "fare": "$15" },
+          { "rideId": "2", "distance": "5km", "fare": "$8" },
+          { "rideId": "3", "distance": "20km", "fare": "$25" }
+        ]
+      }
+      ```
+    - **500 Internal Server Error:** Returns a JSON object with an error message.
+      ```json
+      {
+        "message": "Internal server error",
+        "error": "error message"
+      }
+      ```
 
 ### Get Ride Details
-- **Endpoint:** `/users/ridedetails/:rideId`
-- **Method:** `GET`
-
-### /users/register
-
-**POST** `/users/register`
-
-This endpoint is used to register a new user. It requires the user's first name, last name, email, and password.
-
-#### Request Body
-
-The request body should be a JSON object with the following structure:
-```json
-{
-  "fullname": {
-    "firstname": "string",
-    "lastname": "string"
-  },
-  "email": "string",
-  "password": "string"
-}
-```
-
-#### Validation
-
-- `email`: Must be a valid email address.
-- `fullname.firstname`: Must be at least 3 characters long.
-- `password`: Must be at least 6 characters long.
-
-#### Responses
-
-- **201 Created**: Returns a JSON object containing the user data and token.
-  ```json
-  {
-    "token": "string",
-    "user": {
-      "_id": "string",
-      "fullname": {
-        "firstname": "string",
-        "lastname": "string"
-      },
-      "email": "string",
-      "socketId": "string"
-    }
-  }
-  ```
-
-- **400 Bad Request**: Returns a JSON object with validation errors or user already exists.
-  ```json
-  {
-    "errors": [
+1. **Endpoint:** `/users/ridedetails/:rideId`
+2. **Method:** `GET`
+3. **Responses:**
+    - **200 OK:** Returns a JSON object containing the ride details.
+      ```json
       {
-        "msg": "string",
-        "param": "string",
-        "location": "string"
+        "rideId": "10ys5nkwzruicb",
+        "vehicleDetails": {
+          "vehicleType": "Sedan",
+          "vehicleNumber": "DL5LMN1234",
+          "vehicleName": "Honda City"
+        },
+        "pickupDetails": {
+          "pickupTime": "2023-10-01T10:00:00Z",
+          "pickupLocation": "Connaught Place, Delhi"
+        },
+        "dropoffDetails": {
+          "dropoffTime": "2023-10-01T10:30:00Z",
+          "dropoffLocation": "India Gate, Delhi"
+        },
+        "fare": {
+          "rideFare": 150,
+          "tax": 15,
+          "paymentMethod": "Cash"
+        },
+        "driverName": "John Doe",
+        "rideDate": "2023-10-01T10:00:00.000Z",
+        "rideStatus": "Completed"
       }
-    ]
-  }
-  ```
-  - **OR**
-  ```json
-  {
-    "message": "User already exist"
-  }
-  ```
-
-### /users/login
-
-**POST** `/users/login`
-
-This endpoint is used to log in an existing user. It requires the user's email and password.
-
-#### Request Body
-
-The request body should be a JSON object with the following structure:
-```json
-{
-  "email": "string",
-  "password": "string"
-}
-```
-
-#### Validation
-
-- `email`: Must be a valid email address.
-- `password`: Must be at least 6 characters long.
-
-#### Responses
-
-- **200 OK**: Returns a JSON object with a success message.
-  ```json
-  {
-    "message":"You're successfully logged in to Fery Ride app"
-  }
-  ```
-
-- **400 Bad Request**: Returns a JSON object with validation errors.
-  ```json
-  {
-    "errors": [
+      ```
+    - **404 Not Found:** Returns a JSON object with an error message.
+      ```json
       {
-        "msg": "string",
-        "param": "string",
-        "location": "string"
+        "message": "Ride not found"
       }
-    ]
-  }
-  ```
-
-- **401 Unauthorized**: Returns a JSON object with an error message.
-  ```json
-  {
-    "message": "Invalid email or password"
-  }
-  ```
-
-### /users/profile
-
-**GET** `/users/profile`
-
-This endpoint is used to retrieve the profile of the authenticated user.
-
-#### Headers
-
-- `Authorization`: Bearer token
-
-#### Responses
-
-- **200 OK**: Returns a JSON object containing the user profile.
-  ```json
-  {
-    "_id": "string",
-    "fullname": {
-      "firstname": "string",
-      "lastname": "string"
-    },
-    "email": "string",
-    "socketId": "string"
-  }
-  ```
-
-- **401 Unauthorized**: Returns a JSON object with an error message.
-  ```json
-  {
-    "message": "Unauthorized"
-  }
-  ```
-
-### /users/logout
-
-**GET** `/users/logout`
-
-This endpoint is used to log out the authenticated user.
-
-#### Headers
-
-- `Authorization`: Bearer token
-
-#### Responses
-
-- **200 OK**: Returns a JSON object with a success message.
-  ```json
-  {
-    "message": "Logged out"
-  }
-  ```
-
-- **401 Unauthorized**: Returns a JSON object with an error message.
-  ```json
-  {
-    "message": "Unauthorized"
-  }
-  ```
-
-### /users/listrides
-
-**GET** `/users/listrides`
-
-Returns a list of mock rides with ride ID, distance, and fare.
-
-#### Responses
-
-- **200 OK**: Returns a JSON object containing an array of rides.
-  ```json
-  {
-    "rides": [
-      { "rideId": "1", "distance": "10km", "fare": "$15" },
-      { "rideId": "2", "distance": "5km", "fare": "$8" },
-      { "rideId": "3", "distance": "20km", "fare": "$25" }
-    ]
-  }
-  ```
-
-- **500 Internal Server Error**: Returns a JSON object with an error message.
-  ```json
-  {
-    "message": "Internal server error",
-    "error": "error message"
-  }
-  ```
-
-### /users/ridedetails/:rideId
-
-**GET** `/users/ridedetails/:rideId`
-
-Returns the details of a specific ride based on the ride ID.
-
-#### Responses
-
-- **200 OK**: Returns a JSON object containing the ride details.
-  ```json
-  {
-    "rideId": "10ys5nkwzruicb",
-    "vehicleDetails": {
-      "vehicleType": "Sedan",
-      "vehicleNumber": "DL5LMN1234",
-      "vehicleName": "Honda City"
-    },
-    "pickupDetails": {
-      "pickupTime": "2023-10-01T10:00:00Z",
-      "pickupLocation": "Connaught Place, Delhi"
-    },
-    "dropoffDetails": {
-      "dropoffTime": "2023-10-01T10:30:00Z",
-      "dropoffLocation": "India Gate, Delhi"
-    },
-    "fare": {
-      "rideFare": 150,
-      "tax": 15,
-      "paymentMethod": "Cash"
-    },
-    "driverName": "John Doe",
-    "rideDate": "2023-10-01T10:00:00.000Z",
-    "rideStatus": "Completed"
-  }
-  ```
-
-- **404 Not Found**: Returns a JSON object with an error message.
-  ```json
-  {
-    "message": "Ride not found"
-  }
-  ```
-
-- **500 Internal Server Error**: Returns a JSON object with an error message.
-  ```json
-  {
-    "message": "Internal server error",
-    "error": "error message"
-  }
-  ```x
+      ```
+    - **500 Internal Server Error:** Returns a JSON object with an error message.
+      ```json
+      {
+        "message": "Internal server error",
+        "error": "error message"
+      }
+      ```
