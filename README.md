@@ -45,7 +45,7 @@ This is a Ride API that allows users to register, login, view their profile, lis
 6. Run the application using nodemon:
     ```bash
     npx nodemon
-    ```    ```
+    ```
 
 ## API Endpoints
 
@@ -350,4 +350,4 @@ Returns the details of a specific ride based on the ride ID.
     "message": "Internal server error",
     "error": "error message"
   }
-  ```
+  ```x
