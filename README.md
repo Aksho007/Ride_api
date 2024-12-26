@@ -49,7 +49,7 @@ This is a Ride API that allows users to register, login, view their profile, lis
 
 ## API Endpoints
 
-### User Registration
+### 1. User Registration
 1. **Endpoint:** `/users/register`
 2. **Method:** `POST`
 3. **Body:**
@@ -95,7 +95,7 @@ This is a Ride API that allows users to register, login, view their profile, lis
     }
     ```
 
-### List Rides
+### 2. List Rides
 1. **Endpoint:** `/users/listrides`
 2. **Method:** `GET`
 3. **Responses:**
@@ -117,7 +117,7 @@ This is a Ride API that allows users to register, login, view their profile, lis
       }
       ```
 
-### Get Ride Details
+### 3. Get Ride Details
 1. **Endpoint:** `/users/ridedetails/:rideId`
 2. **Method:** `GET`
 3. **Responses:**
