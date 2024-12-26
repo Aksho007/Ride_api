@@ -232,3 +232,36 @@ This endpoint is used to log out the authenticated user.
 curl -X GET http://localhost:3000/users/logout \
 -H "Authorization: Bearer <token>"
 ```
+
+# Ride API
+
+## Endpoints
+
+### /users/listride
+
+**GET** `/users/listride`
+
+Returns mock ride data.
+
+#### Response
+
+- `200 OK`: Returns a list of mock rides.
+  ```json
+  {
+    "rides": [
+      { "rideId": "1", "distance": "10km", "fare": "Rs15" },
+      { "rideId": "2", "distance": "5km", "fare": "Rs8" },
+      { "rideId": "3", "distance": "20km", "fare": "Rs25" }
+    ]
+  }
+  ```
+
+#### Errors
+
+- `500 Internal Server Error`: If there is an internal server error.
+  ```json
+  {
+    "message": "Internal server error",
+    "error": "Error message"
+  }
+  ```

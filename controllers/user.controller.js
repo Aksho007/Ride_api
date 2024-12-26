@@ -85,9 +85,9 @@ module.exports.logoutUser = async (req, res, next) => {
 module.exports.listRides = async (req, res) => {
     try {
         const mockRides = [
-            { rideId: '1', distance: '10km', fare: '$15' },
-            { rideId: '2', distance: '5km', fare: '$8' },
-            { rideId: '3', distance: '20km', fare: '$25' }
+            { rideId: '1', distance: '10km', fare: 'Rs15' },
+            { rideId: '2', distance: '5km', fare: 'Rs8' },
+            { rideId: '3', distance: '20km', fare: 'Rs25' }
         ];
         res.json({ rides: mockRides });
     } catch (error) {
