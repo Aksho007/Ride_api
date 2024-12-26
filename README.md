@@ -98,14 +98,22 @@ This is a Ride API that allows users to register, login, view their profile, lis
 ### 2. List Rides
 1. **Endpoint:** `/users/listrides`
 2. **Method:** `GET`
-3. **Responses:**
+3. **Headers:**
+    ```json
+    {
+        "Authorization": "Bearer <token>"
+    }
+    ```
+4. **Responses:**
     - **200 OK:** Returns a JSON object containing an array of rides.
       ```json
       {
         "rides": [
-          { "rideId": "1", "distance": "10km", "fare": "$15" },
-          { "rideId": "2", "distance": "5km", "fare": "$8" },
-          { "rideId": "3", "distance": "20km", "fare": "$25" }
+          { "rideId": "10ys5nkwzruicb", "distance": "10km", "fare": "Rs15" },
+          { "rideId": "yc62gyyyq7exz", "distance": "5km", "fare": "Rs8" },
+          { "rideId": "ht4u26dq1konh", "distance": "20km", "fare": "Rs25" },
+          { "rideId": "yvuwy6oyxyry", "distance": "15km", "fare": "Rs18" },
+          { "rideId": "8exfeildz3jll", "distance": "7km", "fare": "Rs10" }
         ]
       }
       ```

@@ -112,7 +112,7 @@ module.exports.getRideDetails = async (rideId) => {
             rideStatus: 'Completed'
         },
         {
-            rideId: 'ht4u26dq1konh',
+            rideId: 'yvuwy6oyxyry',
             vehicleDetails: {
                 vehicleType: 'SUV',
                 vehicleNumber: 'DL5LMN9876',
